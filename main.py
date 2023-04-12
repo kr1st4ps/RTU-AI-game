@@ -84,6 +84,7 @@ while True:
                 player1_score = player2_score = start_score
                 pile = f.generate_pile()
                 pause = False
+                ai_move = None
                 first_multiplier = second_multiplier = result = ""
                 current_screen = "Game_2P"
                 if pvp_p1_button.collidepoint(mouse):
