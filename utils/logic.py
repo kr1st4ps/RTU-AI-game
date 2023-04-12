@@ -43,7 +43,7 @@ class game_state():
     
     #   Logic behind printing this object
     def __str__(self):
-        return f"Player - {self.player_score}\t\t|AI - {self.ai_score}\t\t|Nums - {self.available_numbers}\t\t|MINIMAX - {self.minimax}\t\t|Parents - {len(self.parents)}\t\t|Children{len(self.children)}"
+        return f"Player - {self.player_score}\t\t|AI - {self.ai_score}\t\t|Nums - {self.available_numbers}\t\t|MINIMAX - {self.minimax}\t\t|Parents - {len(self.parents)}\t\t|Children - {len(self.children)}"
     
     #   Function that adds object to registry
     def add_to_registry(self):
@@ -162,12 +162,8 @@ class game_state():
         value = None
         if "AI" == game_state.maximizer:
             value = max(self.children_minimax)
-            print(f"AI is maximizer, his best value appereantly is {value}")
         elif "AI" == game_state.minimizer:
             value = min(self.children_minimax)
-            print(f"AI is minimizer, his best value appereantly is {value}")
-
-        print(f"AI can choose from {self.children_minimax}")
 
         #   Find the state with the best possible value and find what move to take to get it
         for state in self.children:

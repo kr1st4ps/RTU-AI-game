@@ -7,16 +7,16 @@ from utils.logic import game_state
 import utils.functions as f
 import utils.simple_screens as s
 
-# Initialize Pygame
+#   Initialize Pygame
 pygame.init()
 
-# Set up the display
+#   Set up the display
 screen_width = 800
 screen_height = 600
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Kristaps Ālmanis 211RDB061")
 
-# Fonts and colors
+#   Fonts and colors
 small_font = pygame.font.SysFont("assets/fonts/OpenSans-Regular.ttf", 20)
 medium_font = pygame.font.SysFont("assets/fonts/OpenSans-Regular.ttf", 28)
 large_font = pygame.font.SysFont("assets/fonts/OpenSans-Regular.ttf", 60)
@@ -28,8 +28,7 @@ color_button = (75, 100, 200)
 
 #   Setting default values for various variables
 current_screen = "Menu"
-player1_index = player2_index = turn = winner = depth = ai_move = None
-first_button = second_button = third_button = fourth_button = fifth_button = sixth_button = seventh_button = eighth_button = ninth_button = tenth_button = eleventh_button = twelfth_button = None
+player1_index = player2_index = turn = winner = depth = ai_move = first_button = second_button = third_button = fourth_button = fifth_button = sixth_button = seventh_button = eighth_button = ninth_button = tenth_button = eleventh_button = twelfth_button = None
 first_button_pressed = second_button_pressed = third_button_pressed = fourth_button_pressed = fifth_button_pressed = sixth_button_pressed = seventh_button_pressed = eighth_button_pressed = ninth_button_pressed = tenth_button_pressed = eleventh_button_pressed = twelfth_button_pressed = False
 start_score = 31
 
@@ -83,7 +82,6 @@ while True:
                 player1_index, player2_index = random.sample(range(1,7), 2)
                 player1_score = player2_score = start_score
                 pile = f.generate_pile()
-                pause = False
                 ai_move = None
                 first_multiplier = second_multiplier = result = ""
                 current_screen = "Game_2P"
@@ -101,11 +99,9 @@ while True:
                 if ai_p1_button.collidepoint(mouse):
                     root_state = game_state(player1_score, ai_score, pile, 1, "Player 1")
                     turn = "Player 1"
-                    pause = False
                 else:
                     root_state = game_state(player1_score, ai_score, pile, 1, "AI")
                     turn = "AI"
-                    pause = True
                 root_state.add_to_registry()
                 root_state.set_mini_maxi_players()
                 root_state.generate_tree()
@@ -168,10 +164,9 @@ while True:
         twelfth_button = f.draw_pile_button(screen, pile, 12, medium_font, start_x+300, start_y+50, color_black, color_button)
 
         #   Pause when it is AIs turn, to help the other player follow the game
-        if pause:
+        if turn == "AI":
             pygame.display.flip()
             pygame.time.wait(1000)
-            pause = False
 
         #   Draw the calculations area for players
         first_multiplier_background = pygame.draw.rect(screen, color_white, (300,350,50,60))
@@ -260,7 +255,6 @@ while True:
                 if turn == "Player 1":
                     if current_screen == "Game_AI":
                         turn = "AI"
-                        pause = True
                         depth += 1
                     else:
                         turn = "Player 2"

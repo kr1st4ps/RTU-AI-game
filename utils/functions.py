@@ -74,23 +74,23 @@ def generate_pile():
 
 
 #   Function to update the player chosen numbers on screen
-def update_value(pile, base, exponent, nr):
-    if base == "":
-        base = pile[nr]
-    elif exponent == "":
-        exponent = pile[nr]
+def update_value(pile, first_multiplier, second_multiplier, nr):
+    if first_multiplier == "":
+        first_multiplier = pile[nr]
+    elif second_multiplier == "":
+        second_multiplier = pile[nr]
 
-    return base, exponent
+    return first_multiplier, second_multiplier
 
 
 #   Function to check whether a button has been pressed in game
-def check_game_button(button, button_pressed, mouse, base, exponent, pile, nr):
+def check_game_button(button, button_pressed, mouse, first_multiplier, second_multiplier, pile, nr):
     if button and not button_pressed and button.collidepoint(mouse):
         time.sleep(0.2)
-        base, exponent = update_value(pile, base, exponent, nr)
+        first_multiplier, second_multiplier = update_value(pile, first_multiplier, second_multiplier, nr)
         button_pressed = True
 
-    return button_pressed, base, exponent
+    return button_pressed, first_multiplier, second_multiplier
 
 
 #   Function to check whether the game has ended
